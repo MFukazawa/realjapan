@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
+import Search from './components/Search/Search';
 import './App.css';
 
 class App extends Component {
@@ -8,7 +9,8 @@ class App extends Component {
       <div className="App">
         <Navigation />
         {/* {<Logo />
-        <SearchFields />} */}
+        } */}
+        <Search />
       </div>
     )
   }
