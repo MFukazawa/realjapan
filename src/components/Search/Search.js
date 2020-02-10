@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 // import City from "./City";
-// import Area from "./Area";
+import Area from "./Area";
 
 // CSS Styles
 const Wrapper = styled.div`
@@ -97,7 +97,7 @@ class Search extends React.Component {
 
         <SearchItem>
           <SearchLabel>Area</SearchLabel>
-          <SearchSelect name="area" id="Prefecture">
+          {/* <SearchSelect name="area" id="Prefecture">
             <option value="1">北海道</option>
             <option value="2">青森県</option>
             <option value="3">岩手県</option>
@@ -145,7 +145,8 @@ class Search extends React.Component {
             <option value="45">宮崎県</option>
             <option value="46">鹿児島県</option>
             <option value="47">沖縄県</option>
-          </SearchSelect>
+          </SearchSelect> */}
+          <Area />
         </SearchItem>
 
         {/* <SearchItem>

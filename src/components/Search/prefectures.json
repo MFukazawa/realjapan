@@ -1,0 +1,333 @@
+{
+  "data": [
+     {
+        "code": "JP-01",
+        "name": "Hokkaido",
+        "japanese": "北海道",
+        "shortName": "北海道",
+        "region": "北海道"
+     },
+     {
+        "code": "JP-02",
+        "name": "Aomori",
+        "japanese": "青森県",
+        "shortName": "青森",
+        "region": "東北"
+     },
+     {
+        "code": "JP-03",
+        "name": "Iwate",
+        "japanese": "岩手県",
+        "shortName": "岩手",
+        "region": "東北"
+     },
+     {
+        "code": "JP-04",
+        "name": "Miyagi",
+        "japanese": "宮城県",
+        "shortName": "宮城",
+        "region": "東北"
+     },
+     {
+        "code": "JP-05",
+        "name": "Akita",
+        "japanese": "秋田県",
+        "shortName": "秋田",
+        "region": "東北"
+     },
+     {
+        "code": "JP-06",
+        "name": "Yamagata",
+        "japanese": "山形県",
+        "shortName": "山形",
+        "region": "東北"
+     },
+     {
+        "code": "JP-07",
+        "name": "Fukushima",
+        "japanese": "福島県",
+        "shortName": "福島",
+        "region": "東北"
+     },
+     {
+        "code": "JP-08",
+        "name": "Ibaraki",
+        "japanese": "茨城県",
+        "shortName": "茨城",
+        "region": "関東"
+     },
+     {
+        "code": "JP-09",
+        "name": "Tochigi",
+        "japanese": "栃木県",
+        "shortName": "栃木",
+        "region": "関東"
+     },
+     {
+        "code": "JP-10",
+        "name": "Gunma",
+        "japanese": "群馬県",
+        "shortName": "群馬",
+        "region": "関東"
+     },
+     {
+        "code": "JP-11",
+        "name": "Saitama",
+        "japanese": "埼玉県",
+        "shortName": "埼玉",
+        "region": "関東"
+     },
+     {
+        "code": "JP-12",
+        "name": "Chiba",
+        "japanese": "千葉県",
+        "shortName": "千葉",
+        "region": "関東"
+     },
+     {
+        "code": "JP-13",
+        "name": "Tokyo",
+        "japanese": "東京都",
+        "shortName": "東京",
+        "region": "関東"
+     },
+     {
+        "code": "JP-14",
+        "name": "Kanagawa",
+        "japanese": "神奈川県",
+        "shortName": "神奈川",
+        "region": "関東"
+     },
+     {
+        "code": "JP-15",
+        "name": "Niigata",
+        "japanese": "新潟県",
+        "shortName": "新潟",
+        "region": "中部"
+     },
+     {
+        "code": "JP-16",
+        "name": "Toyama",
+        "japanese": "富山県",
+        "shortName": "富山",
+        "region": "関東"
+     },
+     {
+        "code": "JP-17",
+        "name": "Ishikawa",
+        "japanese": "石川県",
+        "shortName": "石川",
+        "region": "関東"
+     },
+     {
+        "code": "JP-18",
+        "name": "Fukui",
+        "japanese": "福井県",
+        "shortName": "福井",
+        "region": "関東"
+     },
+     {
+        "code": "JP-19",
+        "name": "Yamanashi",
+        "japanese": "山梨県",
+        "shortName": "山梨",
+        "region": "関東"
+     },
+     {
+        "code": "JP-20",
+        "name": "Nagano",
+        "japanese": "長野県",
+        "shortName": "長野",
+        "region": "関東"
+     },
+     {
+        "code": "JP-21",
+        "name": "Gifu",
+        "japanese": "岐阜県",
+        "shortName": "岐阜",
+        "region": "関東"
+     },
+     {
+        "code": "JP-22",
+        "name": "Shizuoka",
+        "japanese": "静岡県",
+        "shortName": "静岡",
+        "region": "関東"
+     },
+     {
+        "code": "JP-23",
+        "name": "Aichi",
+        "japanese": "愛知県",
+        "shortName": "愛知",
+        "region": "関東"
+     },
+     {
+        "code": "JP-24",
+        "name": "Mie",
+        "japanese": "三重県",
+        "shortName": "三重",
+        "region": "関東"
+     },
+     {
+        "code": "JP-25",
+        "name": "Shiga",
+        "japanese": "滋賀県",
+        "shortName": "滋賀",
+        "region": "近畿"
+     },
+     {
+        "code": "JP-26",
+        "name": "Kyoto",
+        "japanese": "京都府",
+        "shortName": "京都",
+        "region": "近畿"
+     },
+     {
+        "code": "JP-27",
+        "name": "Osaka",
+        "japanese": "大阪府",
+        "shortName": "大阪",
+        "region": "近畿"
+     },
+     {
+        "code": "JP-28",
+        "name": "Hyogo",
+        "japanese": "兵庫県",
+        "shortName": "兵庫",
+        "region": "近畿"
+     },
+     {
+        "code": "JP-29",
+        "name": "Nara",
+        "japanese": "奈良県",
+        "shortName": "奈良",
+        "region": "近畿"
+     },
+     {
+        "code": "JP-30",
+        "name": "Wakayama",
+        "japanese": "和歌山県",
+        "shortName": "和歌山",
+        "region": "近畿"
+     },
+     {
+        "code": "JP-31",
+        "name": "Tottori",
+        "japanese": "鳥取県",
+        "shortName": "鳥取",
+        "region": "中国"
+     },
+     {
+        "code": "JP-32",
+        "name": "Shimane",
+        "japanese": "島根県",
+        "shortName": "島根",
+        "region": "中国"
+     },
+     {
+        "code": "JP-33",
+        "name": "Okayama",
+        "japanese": "岡山県",
+        "shortName": "岡山",
+        "region": "中国"
+     },
+     {
+        "code": "JP-34",
+        "name": "Hiroshima",
+        "japanese": "広島県",
+        "shortName": "広島",
+        "region": "中国"
+     },
+     {
+        "code": "JP-35",
+        "name": "Yamaguchi",
+        "japanese": "山口県",
+        "shortName": "山口",
+        "region": "中国"
+     },
+     {
+        "code": "JP-36",
+        "name": "Tokushima",
+        "japanese": "徳島県",
+        "shortName": "徳島",
+        "region": "四国"
+     },
+     {
+        "code": "JP-37",
+        "name": "Kagawa",
+        "japanese": "香川県",
+        "shortName": "香川",
+        "region": "四国"
+     },
+     {
+        "code": "JP-38",
+        "name": "Ehime",
+        "japanese": "愛媛県",
+        "shortName": "愛媛",
+        "region": "四国"
+     },
+     {
+        "code": "JP-39",
+        "name": "Kochi",
+        "japanese": "高知県",
+        "shortName": "高知",
+        "region": "四国"
+     },
+     {
+        "code": "JP-40",
+        "name": "Fukuoka",
+        "japanese": "福岡県",
+        "shortName": "福岡",
+        "region": "九州"
+     },
+     {
+        "code": "JP-41",
+        "name": "Saga",
+        "japanese": "佐賀県",
+        "shortName": "佐賀",
+        "region": "九州"
+     },
+     {
+        "code": "JP-42",
+        "name": "Nagasaki",
+        "japanese": "長崎県",
+        "shortName": "長崎",
+        "region": "九州"
+     },
+     {
+        "code": "JP-43",
+        "name": "Kumamoto",
+        "japanese": "熊本県",
+        "shortName": "熊本",
+        "region": "九州"
+     },
+     {
+        "code": "JP-44",
+        "name": "Oita",
+        "japanese": "大分県",
+        "shortName": "大分",
+        "region": "九州"
+     },
+     {
+        "code": "JP-45",
+        "name": "Miyazaki",
+        "japanese": "宮崎県",
+        "shortName": "宮崎",
+        "region": "九州"
+     },
+     {
+        "code": "JP-46",
+        "name": "Kagoshima",
+        "japanese": "鹿児島県",
+        "shortName": "鹿児島",
+        "region": "九州"
+     },
+     {
+        "code": "JP-47",
+        "name": "Okinawa",
+        "japanese": "沖縄県",
+        "shortName": "沖縄",
+        "region": "九州"
+     }
+  ]
+}
