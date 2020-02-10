@@ -8,6 +8,8 @@ class App extends Component {
     return (
       <div className="App">
         <Navigation />
+        <h1>RealJapan</h1>
+        <p>Search Japan Real Estate transactions!</p>
         {/* {<Logo />
         } */}
         <Search />

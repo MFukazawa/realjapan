@@ -41,7 +41,7 @@ const Search = () => {
 
       <SearchItem>
         <SearchLabel>To Year</SearchLabel>
-        <select name="ToYear" id="ToYear">
+        <SearchSelect name="ToYear" id="ToYear">
           <option value="">--Please choose an option--</option>
           <option value="2014">2014</option>
           <option value="2015">2015</option>
@@ -49,44 +49,44 @@ const Search = () => {
           <option value="2017">2017</option>
           <option value="2018">2018</option>
           <option value="2019">2019</option>
-        </select>
+        </SearchSelect>
       </SearchItem>
 
       <SearchItem>
         <SearchLabel>From Quarter</SearchLabel>
-        <select name="FromQuarter" id="FromQuarter">
+        <SearchSelect name="FromQuarter" id="FromQuarter">
           <option value="">--Please choose an option--</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-        </select>
+        </SearchSelect>
       </SearchItem>
 
       <SearchItem>
         <SearchLabel>To Quarter</SearchLabel>
-        <select name="ToQuarter" id="ToQuarter">
+        <SearchSelect name="ToQuarter" id="ToQuarter">
           <option value="">--Please choose an option--</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
-        </select>
+        </SearchSelect>
       </SearchItem>
 
       <SearchItem>
         <SearchLabel>Area</SearchLabel>
-        <select></select>
+        <SearchSelect></SearchSelect>
       </SearchItem>
 
       <SearchItem>
         <SearchLabel>City</SearchLabel>
-        <select></select>
+        <SearchSelect></SearchSelect>
       </SearchItem>
 
       <SearchItem>
         <SearchLabel>Station</SearchLabel>
-        <select></select>
+        <SearchSelect></SearchSelect>
       </SearchItem>
     </Wrapper>
   );
