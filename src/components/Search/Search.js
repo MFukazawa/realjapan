@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Area from './Area';
 
 const Wrapper = styled.div` 
   padding: 0 10%;
@@ -76,7 +77,7 @@ const Search = () => {
 
       <SearchItem>
         <SearchLabel>Area</SearchLabel>
-        <SearchSelect></SearchSelect>
+        <Area />
       </SearchItem>
 
       <SearchItem>

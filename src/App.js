@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
 import Search from './components/Search/Search';
+// import Area from './components/Search/Area';
 import './App.css';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         {/* {<Logo />
         } */}
         <Search />
+        {/* <Area /> */}
       </div>
     )
   }
