@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-// import prefectures from "./prefectures.json";
 
-const SearchSelect= styled.select`
+const SearchSelect = styled.select`
   text-align-last: center;
   text-align: center;
-   -ms-text-align-last: center;
-   -moz-text-align-last: center;
-`
+  -ms-text-align-last: center;
+  -moz-text-align-last: center;
+`;
 
 class Area extends React.Component {
   constructor(props) {
@@ -20,42 +19,40 @@ class Area extends React.Component {
   }
 
   componentDidMount() {
-    fetch("./prefectures.json")
-      .then(res => JSON.stringify(res))
+    fetch("../prefectures.json")
+      .then(res => res.json())
       .then(
-        (result) => {
+        result => {
           this.setState({
-            // isLoaded: true,
+            isLoaded: true,
             data: result.data
           });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
             error
           });
         }
-      )
+      );
   }
 
   render() {
-    const { error, data } = this.state;
+    const { error, isLoaded, data } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
-    } 
-    
-    // else if (!isLoaded) {
-    //   return <div>Loading...</div>;
-    // } 
-    
-    else {
+    } else if (!isLoaded) {
+      return <div>Loading...</div>;
+    } else {
       return (
         <SearchSelect>
           {data.map(data => (
-            <option key={data.code}>
+            <option 
+              key={data.code}
+            >
               {data.name}
             </option>
           ))}
