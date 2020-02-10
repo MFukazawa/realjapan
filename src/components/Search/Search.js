@@ -47,7 +47,7 @@ class Search extends React.Component {
       <Wrapper>
         <SearchItem>
           <SearchLabel htmlFor="FromYear">From Year</SearchLabel>
-          <SearchSelect name="FromYear" id="FromYear">
+          <SearchSelect name="fromYear" id="FromYear">
             <option className="search-option" value="">
               --Please choose an option--
             </option>
@@ -62,7 +62,7 @@ class Search extends React.Component {
 
         <SearchItem>
           <SearchLabel>To Year</SearchLabel>
-          <SearchSelect name="ToYear" id="ToYear">
+          <SearchSelect name="toYear" id="ToYear">
             <option value="">--Please choose an option--</option>
             <option value="2014">2014</option>
             <option value="2015">2015</option>
@@ -75,7 +75,7 @@ class Search extends React.Component {
 
         <SearchItem>
           <SearchLabel>From Quarter</SearchLabel>
-          <SearchSelect name="FromQuarter" id="FromQuarter">
+          <SearchSelect name="fromQuarter" id="FromQuarter">
             <option value="">--Please choose an option--</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -86,7 +86,7 @@ class Search extends React.Component {
 
         <SearchItem>
           <SearchLabel>To Quarter</SearchLabel>
-          <SearchSelect name="ToQuarter" id="ToQuarter">
+          <SearchSelect name="toQuarter" id="ToQuarter">
             <option value="">--Please choose an option--</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -97,7 +97,7 @@ class Search extends React.Component {
 
         <SearchItem>
           <SearchLabel>Area</SearchLabel>
-          <SearchSelect name="Prefecture" id="Prefecture">
+          <SearchSelect name="area" id="Prefecture">
             <option value="1">北海道</option>
             <option value="2">青森県</option>
             <option value="3">岩手県</option>
