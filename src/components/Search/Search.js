@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import City from './City';
 import Area from './Area';
 
 const Wrapper = styled.div` 
@@ -82,7 +83,7 @@ const Search = () => {
 
       <SearchItem>
         <SearchLabel>City</SearchLabel>
-        <SearchSelect></SearchSelect>
+        <City />
       </SearchItem>
 
       <SearchItem>

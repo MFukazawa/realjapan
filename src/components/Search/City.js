@@ -8,24 +8,24 @@ const SearchSelect= styled.select`
    -moz-text-align-last: center;
 `
 
-class Area extends React.Component {
+class City extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
-      result: []
+      data: []
     };
   }
 
   componentDidMount() {
-    fetch("https://opendata.resas-portal.go.jp/api/v1/prefectures")
+    fetch("https://www.land.mlit.go.jp/webland_english/api/CitySearch?area=45")
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
             isLoaded: true,
-            result: result.data
+            data: result.data
           });
         },
         // Note: it's important to handle errors here
@@ -41,7 +41,7 @@ class Area extends React.Component {
   }
 
   render() {
-    const { error, isLoaded, result } = this.state;
+    const { error, isLoaded, data } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -49,9 +49,9 @@ class Area extends React.Component {
     } else {
       return (
         <SearchSelect>
-          {result.map(result => (
-            <option key={result.prefCode}>
-              {result.prefName}
+          {data.map(data => (
+            <option key={data.id}>
+              {data.name}
             </option>
           ))}
         </SearchSelect>
@@ -60,4 +60,4 @@ class Area extends React.Component {
   }
 }
 
-export default Area;
+export default City;
