@@ -14,7 +14,8 @@ class Area extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      data: []
+      data: [],
+      area: ""
     };
   }
 
@@ -51,8 +52,8 @@ class Area extends React.Component {
         <SearchSelect
           name="area"
           id="Area"
-          value={state.area}
-          onChange={handleChange}
+          // value={state.area}
+          // onChange={handleChange}
         >
           {data.map(data => (
             <option 
