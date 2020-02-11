@@ -48,7 +48,12 @@ class Area extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <SearchSelect>
+        <SearchSelect
+          name="area"
+          id="Area"
+          value={state.area}
+          onChange={handleChange}
+        >
           {data.map(data => (
             <option 
               key={data.code}
