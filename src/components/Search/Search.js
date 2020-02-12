@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import City from "./City";
-import Area from "./Area";
+import { useFetch } from "./hooks";
 
 // CSS Styles
 const Wrapper = styled.div`
@@ -36,8 +35,10 @@ function Search() {
     toYear: "--",
     fromQuarter: "",
     toQuarter: "",
-    area: "--Please choose an option--"
+    area: "this is working"
   });
+
+  const [data, loading] = useFetch("../prefectures.json");
 
   function handleChange(event) {
     const value = event.target.value;
@@ -70,8 +71,8 @@ function Search() {
 
       <SearchItem>
         <SearchLabel>To Year</SearchLabel>
-        <SearchSelect 
-          name="toYear" 
+        <SearchSelect
+          name="toYear"
           id="ToYear"
           value={state.toYear}
           onChange={handleChange}
@@ -89,8 +90,8 @@ function Search() {
 
       <SearchItem>
         <SearchLabel>From Quarter</SearchLabel>
-        <SearchSelect 
-          name="fromQuarter" 
+        <SearchSelect
+          name="fromQuarter"
           id="FromQuarter"
           value={state.fromQuarter}
           onChange={handleChange}
@@ -105,8 +106,8 @@ function Search() {
 
       <SearchItem>
         <SearchLabel>To Quarter</SearchLabel>
-        <SearchSelect 
-          name="toQuarter" 
+        <SearchSelect
+          name="toQuarter"
           id="ToQuarter"
           value={state.toQuarter}
           onChange={handleChange}
@@ -121,18 +122,31 @@ function Search() {
 
       <SearchItem>
         <SearchLabel>Area</SearchLabel>
-        <Area />
+        {loading ? (
+          "Loading..."
+        ) : (
+          <SearchSelect
+            name="area"
+            id="Area"
+            value={state.area}
+            onChange={handleChange}
+          >
+            {data.data.map(({ code, name }) => (
+              <option key={code}>{name}</option>
+            ))}
+          </SearchSelect>
+        )}
       </SearchItem>
 
       {/* <SearchItem>
-        <SearchLabel>City</SearchLabel>
-        <City />
-      </SearchItem>
+            <SearchLabel>City</SearchLabel>
+            <City />
+          </SearchItem>
 
-      <SearchItem>
-        <SearchLabel>Station</SearchLabel>
-        <SearchSelect></SearchSelect>
-      </SearchItem> */}
+          <SearchItem>
+            <SearchLabel>Station</SearchLabel>
+            <SearchSelect></SearchSelect>
+          </SearchItem> */}
 
       <button>Submit</button>
     </Wrapper>
