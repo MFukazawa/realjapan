@@ -26,7 +26,8 @@ class Area extends React.Component {
         result => {
           this.setState({
             isLoaded: true,
-            data: result.data
+            data: result.data,
+            area: ""
           });
         },
         // Note: it's important to handle errors here
@@ -42,7 +43,7 @@ class Area extends React.Component {
   }
 
   render() {
-    const { error, isLoaded, data } = this.state;
+    const { error, isLoaded, data, area, handleChange } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -52,15 +53,11 @@ class Area extends React.Component {
         <SearchSelect
           name="area"
           id="Area"
-          // value={state.area}
-          // onChange={handleChange}
+          value={area}
+          onChange={{ handleChange }}
         >
           {data.map(data => (
-            <option 
-              key={data.code}
-            >
-              {data.name}
-            </option>
+            <option key={data.code}>{data.name}</option>
           ))}
         </SearchSelect>
       );

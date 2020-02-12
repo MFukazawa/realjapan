@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useFetch } from "./hooks";
+// import Area from "./Area";
 
 // CSS Styles
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   padding: 0 10%;
 `;
 
@@ -35,7 +36,7 @@ function Search() {
     toYear: "--",
     fromQuarter: "",
     toQuarter: "",
-    area: "this is working"
+    area: "Hokkaido"
   });
 
   const [data, loading] = useFetch("../prefectures.json");
@@ -48,8 +49,34 @@ function Search() {
     });
   }
 
+  function submitForm(e) {
+    const fromYear = fromYear.value;
+    const { fromQuarter } = this.state.fromQuarter.value;
+    const { toYear } = this.state.toYear.value;
+    const { toQuarter } = this.state.toQuarter.value;
+    const { area } = this.state.area.value;
+
+    e.preventDefault();
+    fetch(
+      `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${fromYear}${fromQuarter}&to=${toYear}${toQuarter}&area=${area}`,
+      {
+        method: "POST",
+        body: JSON.stringify(this.state.value),
+        headers: {
+          "Content-type": "application/json"
+        }
+      }
+    )
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+      });
+  }
+
   return (
-    <Wrapper>
+    <Wrapper onSubmit={submitForm}>
       <SearchItem>
         <SearchLabel htmlFor="FromYear">From Year</SearchLabel>
         <SearchSelect
@@ -148,7 +175,7 @@ function Search() {
             <SearchSelect></SearchSelect>
           </SearchItem> */}
 
-      <button>Submit</button>
+      <button type="submit">Submit</button>
     </Wrapper>
   );
 }
