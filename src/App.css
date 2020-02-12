@@ -1,7 +1,6 @@
 .App {
   text-align: center;
-  background-image: url("./assets/tokyo.jpg");
-  background-size: cover;
+  background: url("./assets/tokyo.jpg") center no-repeat;
   height: 100vh;
 }
 
