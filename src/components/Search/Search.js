@@ -56,6 +56,7 @@ function Search() {
           id="FromYear"
           value={state.fromYear}
           onChange={handleChange}
+          required
         >
           <option value="--">--</option>
           <option value="2014">2014</option>
@@ -74,6 +75,7 @@ function Search() {
           id="ToYear"
           value={state.toYear}
           onChange={handleChange}
+          required
         >
           <option value="--">--</option>
           <option value="2014">2014</option>
