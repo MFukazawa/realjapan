@@ -32,10 +32,10 @@ const SearchSelect = styled.select`
 
 function Search() {
   const [state, setState] = useState({
-    fromYear: "--",
-    toYear: "--",
-    fromQuarter: "",
-    toQuarter: "",
+    fromYear: "2014",
+    toYear: "2014",
+    fromQuarter: "1",
+    toQuarter: "1",
     area: "Hokkaido"
   });
 
@@ -50,22 +50,23 @@ function Search() {
   }
 
   function submitForm(e) {
-    const fromYear = fromYear.value;
-    const { fromQuarter } = this.state.fromQuarter.value;
-    const { toYear } = this.state.toYear.value;
-    const { toQuarter } = this.state.toQuarter.value;
-    const { area } = this.state.area.value;
+    // const { fromYear } = this.state.fromYear.setState;
+    // const { fromQuarter } = this.state.fromQuarter.value;
+    // const { toYear } = this.state.toYear.value;
+    // const { toQuarter } = this.state.toQuarter.value;
+    // const { area } = this.state.area.value;
 
     e.preventDefault();
     fetch(
-      `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${fromYear}${fromQuarter}&to=${toYear}${toQuarter}&area=${area}`,
-      {
-        method: "POST",
-        body: JSON.stringify(this.state.value),
-        headers: {
-          "Content-type": "application/json"
-        }
-      }
+      "https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=20161&to=20163&area=45"
+      // `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${fromYear.value}${fromQuarter}&to=${toYear}${toQuarter}&area=${area}`,
+      // {
+      //   method: "POST",
+      //   body: JSON.stringify(this.state.value),
+      //   headers: {
+      //     "Content-type": "application/json"
+      //   }
+      // }
     )
       .then(res => {
         return res.json();
