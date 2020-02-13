@@ -36,7 +36,8 @@ function Search() {
     toYear: "2014",
     fromQuarter: "1",
     toQuarter: "1",
-    area: "Hokkaido"
+    area: "Hokkaido",
+    listings: []
   });
 
   const [data, loading] = useFetch("../prefectures.json");

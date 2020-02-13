@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 // const Wrapper = styled.div`
 //   ${'' /* padding: 4em; */}
@@ -12,19 +12,19 @@ const Nav = styled.nav`
   font-size: 1.5em;
   text-align: right;
   padding: 2em;
-`
+`;
 
 const Link = styled.a`
   text-decoration: none;
   color: cornflowerblue;
-`
+`;
 
 const Navigation = () => {
   return (
     <Nav>
       <Link href="#">Login</Link>
-    </Nav> 
+    </Nav>
   );
-}
+};
 
 export default Navigation;
