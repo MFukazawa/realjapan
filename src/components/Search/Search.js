@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useFetch } from "./hooks";
+// import Listings from "../Listings";
 // import Area from "./Area";
 
 // CSS Styles
@@ -31,32 +32,28 @@ const SearchSelect = styled.select`
 //
 
 function Search() {
-  const [state, setState] = useState({
-    fromYear: "2014",
-    toYear: "2014",
-    fromQuarter: "1",
-    toQuarter: "1",
-    area: "Hokkaido",
-    listings: []
-  });
+  // const [state, setState] = useState({
+  //   fromYear: "2014",
+  //   toYear: "2014",
+  //   fromQuarter: "1",
+  //   toQuarter: "1",
+  //   area: "Hokkaido",
+  //   listings: []
+  // });
 
-  const [data, loading] = useFetch("../prefectures.json");
+  const [listings, setListings] = useState(null);
 
-  function handleChange(event) {
-    const value = event.target.value;
-    setState({
-      ...state,
-      [event.target.name]: value
-    });
-  }
+  // const [data, loading] = useFetch("../prefectures.json");
+
+  // function handleChange(event) {
+  //   const value = event.target.value;
+  //   setState({
+  //     ...state,
+  //     [event.target.name]: value
+  //   });
+  // }
 
   function submitForm(e) {
-    // const { fromYear } = this.state.fromYear.setState;
-    // const { fromQuarter } = this.state.fromQuarter.value;
-    // const { toYear } = this.state.toYear.value;
-    // const { toQuarter } = this.state.toQuarter.value;
-    // const { area } = this.state.area.value;
-
     e.preventDefault();
     fetch(
       "https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=20161&to=20163&area=45"
@@ -69,17 +66,16 @@ function Search() {
       //   }
       // }
     )
-      .then(res => {
-        return res.json();
-      })
+      .then(res => res.json())
       .then(data => {
+        setListings(data);
         console.log(data);
       });
   }
 
   return (
     <Wrapper onSubmit={submitForm}>
-      <SearchItem>
+      {/* <SearchItem>
         <SearchLabel htmlFor="FromYear">From Year</SearchLabel>
         <SearchSelect
           name="fromYear"
@@ -175,9 +171,23 @@ function Search() {
           <SearchItem>
             <SearchLabel>Station</SearchLabel>
             <SearchSelect></SearchSelect>
-          </SearchItem> */}
-
+          </SearchItem> }{" "}
+      */}
       <button type="submit">Submit</button>
+      <div className="listing">
+        {listings &&
+          listings.map((listing, index) => {
+            return (
+              <ul className="listing" key="index">
+                <li>{listing.Type}</li>
+                <li>{listing.Region}</li>
+                <li>{listing.Municipality}</li>
+                <li>{listing.DistrictName}</li>
+                <li>{listing.TradePrice}</li>
+              </ul>
+            );
+          })}
+      </div>
     </Wrapper>
   );
 }
