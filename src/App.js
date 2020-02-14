@@ -36,13 +36,21 @@ function App() {
         <div className="listings">
           {listings &&
             listings.data.map((listing, index) => {
+              const cleanPrice = listing.TradePrice.split("")
+                .reverse()
+                .map((digit, index) =>
+                  index !== 0 && index % 3 === 0 ? `${digit},` : digit
+                )
+                .reverse()
+                .join("");
+
               return (
                 <ul className="listing" key={index}>
                   <li>Property Type: {listing.Type}</li>
                   <li>Zoning: {listing.Region}</li>
                   <li>City: {listing.Municipality}</li>
                   <li>District: {listing.DistrictName}</li>
-                  <li>Price: {listing.TradePrice}</li>
+                  <li>Price: {cleanPrice} Yen</li>
                   <li>Square footage: {listing.Area}</li>
                   <li>Year Built: {listing.BuildingYear}</li>
                   <li>Period of Sale: {listing.Period}</li>

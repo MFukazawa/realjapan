@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useFetch } from "./hooks";
-// import Listings from "../Listings";
 // import Area from "./Area";
 
 // CSS Styles
