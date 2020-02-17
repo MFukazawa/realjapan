@@ -49,53 +49,54 @@ function App() {
         </div>
       </div>
       <div id="app-wrapper">
-        {/* <Search /> */}
+        <div className="app-contents">
+          {/* <Search /> */}
 
-        {/* Fetch data from API */}
+          {/* Fetch data from API */}
 
-        {/* Result Categories */}
-        <div id="categories">
-          <span>
-            Property Type
-            <i class="fas fa-sort"></i>
-          </span>
-          <span>Zoning</span>
-          <span>Municipality</span>
-          <span>District Name</span>
-          <span>Sale Price (Yen)</span>
-          <span>Area (m²)</span>
-          <span>Year Built</span>
-          <span>Period of Sale</span>
-        </div>
+          {/* Result Categories */}
+          <div id="categories">
+            <span>
+              Property Type
+              <i class="fas fa-sort"></i>
+            </span>
+            <span>Zoning</span>
+            <span>Municipality</span>
+            <span>District Name</span>
+            <span>Sale Price (Yen)</span>
+            <span>Area (m²)</span>
+            <span>Year Built</span>
+            <span>Period of Sale</span>
+          </div>
 
-        {/* Display data from API */}
-        <div className="listings-wrapper">
-          {listings &&
-            listings.data.map((listing, index) => {
-              const cleanPrice = listing.TradePrice.split("")
-                .reverse()
-                .map((digit, index) =>
-                  index !== 0 && index % 3 === 0 ? `${digit},` : digit
-                )
-                .reverse()
-                .join("");
+          {/* Display data from API */}
+          <div className="listings-wrapper">
+            {listings &&
+              listings.data.map((listing, index) => {
+                const cleanPrice = listing.TradePrice.split("")
+                  .reverse()
+                  .map((digit, index) =>
+                    index !== 0 && index % 3 === 0 ? `${digit},` : digit
+                  )
+                  .reverse()
+                  .join("");
 
-              return (
-                <ul className="listings" key={index}>
-                  <li className="listing">{listing.Type}</li>
-                  <li className="listing">{listing.Region}</li>
-                  <li className="listing">{listing.Municipality}</li>
-                  <li className="listing">{listing.DistrictName}</li>
-                  <li className="listing">{cleanPrice}</li>
-                  <li className="listing">{listing.Area}</li>
-                  <li className="listing">{listing.BuildingYear}</li>
-                  <li className="listing">{listing.Period}</li>
-                </ul>
-              );
-            })}
+                return (
+                  <ul className="listings" key={index}>
+                    <li className="listing">{listing.Type}</li>
+                    <li className="listing">{listing.Region}</li>
+                    <li className="listing">{listing.Municipality}</li>
+                    <li className="listing">{listing.DistrictName}</li>
+                    <li className="listing">{cleanPrice}</li>
+                    <li className="listing">{listing.Area}</li>
+                    <li className="listing">{listing.BuildingYear}</li>
+                    <li className="listing">{listing.Period}</li>
+                  </ul>
+                );
+              })}
+          </div>
         </div>
       </div>
-
       {/* Credit */}
       <p style={{ fontSize: ".5em" }}>
         Data provided by https://www.land.mlit.go.jp/webland/
