@@ -20,7 +20,7 @@
 
 .hero {
   background-color: rgba(255, 255, 255, 0.47);
-  margin: 100px auto 0;
+  margin: 50px auto 0;
   width: 400px;
   padding: 15px;
   border-radius: 10px;
@@ -42,7 +42,7 @@
 
 .button-container {
   padding: 25px;
-  margin: 50px 0 0 0;
+  margin: 0 0 0 0;
 }
 
 .fetch-button {
@@ -73,4 +73,15 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 60px;
   grid-gap: 15px 10px;
+}
+
+.listings:last-child {
+  margin-block-end: 0;
+}
+
+.footer {
+  font-size: 0.5em;
+  background-color: #f6fbff;
+  padding: 10px;
+  margin: 0;
 }

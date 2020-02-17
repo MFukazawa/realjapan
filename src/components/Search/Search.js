@@ -31,26 +31,26 @@ const SearchSelect = styled.select`
 //
 
 function Search() {
-  // const [state, setState] = useState({
-  //   fromYear: "2014",
-  //   toYear: "2014",
-  //   fromQuarter: "1",
-  //   toQuarter: "1",
-  //   area: "Hokkaido",
-  //   listings: []
-  // });
+  const [state, setState] = useState({
+    fromYear: "2014",
+    toYear: "2014",
+    fromQuarter: "1",
+    toQuarter: "1",
+    area: "Hokkaido",
+    listings: []
+  });
 
   const [listings, setListings] = useState(null);
 
-  // const [data, loading] = useFetch("../prefectures.json");
+  const [data, loading] = useFetch("../prefectures.json");
 
-  // function handleChange(event) {
-  //   const value = event.target.value;
-  //   setState({
-  //     ...state,
-  //     [event.target.name]: value
-  //   });
-  // }
+  function handleChange(event) {
+    const value = event.target.value;
+    setState({
+      ...state,
+      [event.target.name]: value
+    });
+  }
 
   function submitForm(e) {
     e.preventDefault();
@@ -74,7 +74,7 @@ function Search() {
 
   return (
     <Wrapper onSubmit={submitForm}>
-      {/* <SearchItem>
+      <SearchItem>
         <SearchLabel htmlFor="FromYear">From Year</SearchLabel>
         <SearchSelect
           name="fromYear"
@@ -92,7 +92,6 @@ function Search() {
           <option value="2019">2019</option>
         </SearchSelect>
       </SearchItem>
-
       <SearchItem>
         <SearchLabel>To Year</SearchLabel>
         <SearchSelect
@@ -111,7 +110,6 @@ function Search() {
           <option value="2019">2019</option>
         </SearchSelect>
       </SearchItem>
-
       <SearchItem>
         <SearchLabel>From Quarter</SearchLabel>
         <SearchSelect
@@ -127,7 +125,6 @@ function Search() {
           <option value="4">4</option>
         </SearchSelect>
       </SearchItem>
-
       <SearchItem>
         <SearchLabel>To Quarter</SearchLabel>
         <SearchSelect
@@ -143,7 +140,6 @@ function Search() {
           <option value="4">4</option>
         </SearchSelect>
       </SearchItem>
-
       <SearchItem>
         <SearchLabel>Area</SearchLabel>
         {loading ? (
@@ -161,18 +157,15 @@ function Search() {
           </SearchSelect>
         )}
       </SearchItem>
-
-      {/* <SearchItem>
-            <SearchLabel>City</SearchLabel>
-            <City />
-          </SearchItem>
-
-          <SearchItem>
-            <SearchLabel>Station</SearchLabel>
-            <SearchSelect></SearchSelect>
-          </SearchItem> }{" "}
-      */}
-      <button type="submit">Submit</button>
+      <SearchItem>
+        <SearchLabel>City</SearchLabel>
+        <City />
+      </SearchItem>
+      <SearchItem>
+        <SearchLabel>Station</SearchLabel>
+        <SearchSelect></SearchSelect>
+      </SearchItem>{" "}
+      } <button type="submit">Submit</button>
       <div className="listing">
         {listings &&
           listings.map((listing, index) => {

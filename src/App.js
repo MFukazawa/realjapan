@@ -1,15 +1,56 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Navigation from "./components/Navigation/Navigation";
-// import Search from "./components/Search/Search";
 import "./App.css";
+import styled from "styled-components";
+import { useFetch } from "./components/Search/hooks";
+
+// CSS Styles
+const Wrapper = styled.form`
+  padding: 0 10%;
+  background-color: rgba(255, 255, 255, 0.47);
+  border-radius: 10px;
+  width: 300px;
+  margin: 0 auto;
+`;
+
+const SearchLabel = styled.label`
+  font-size: 1em;
+`;
+
+const SearchItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 0;
+`;
+
+const SearchSelect = styled.select`
+  text-align-last: center;
+  text-align: center;
+  -ms-text-align-last: center;
+  -moz-text-align-last: center;
+`;
+
+// End styles
 
 function App() {
   const [listings, setListings] = useState(null);
 
+  const [state, setState] = useState({
+    fromYear: "--",
+    toYear: "--",
+    fromQuarter: "--",
+    toQuarter: "--",
+    area: "Miyazaki",
+    code: "45"
+  });
+
+  const [data, loading] = useFetch("../prefectures.json");
+
   const fetchData = async () => {
     const response = await axios.get(
-      "https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=20161&to=20163&area=45"
+      `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=45`
     );
     console.log(response.data);
     setListings(response.data);
@@ -32,6 +73,15 @@ function App() {
     scroller.scrollIntoView({ behavior: "smooth" });
   };
 
+  function handleChange(event) {
+    const value = event.target.value;
+    setState({
+      ...state,
+      [event.target.name]: value
+    });
+    console.log(value);
+  }
+
   return (
     <div className="App">
       <div className="top">
@@ -42,6 +92,93 @@ function App() {
         </div>
         {/* {<Logo />
         } */}
+        <Wrapper>
+          <SearchItem>
+            <SearchLabel htmlFor="FromYear">From Year</SearchLabel>
+            <SearchSelect
+              name="fromYear"
+              id="FromYear"
+              value={state.fromYear}
+              onChange={handleChange}
+              required
+            >
+              <option value="--">--</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+            </SearchSelect>
+          </SearchItem>
+          <SearchItem>
+            <SearchLabel>To Year</SearchLabel>
+            <SearchSelect
+              name="toYear"
+              id="ToYear"
+              value={state.toYear}
+              onChange={handleChange}
+              required
+            >
+              <option value="--">--</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+            </SearchSelect>
+          </SearchItem>
+          <SearchItem>
+            <SearchLabel>From Quarter</SearchLabel>
+            <SearchSelect
+              name="fromQuarter"
+              id="FromQuarter"
+              value={state.fromQuarter}
+              onChange={handleChange}
+            >
+              <option value="--">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </SearchSelect>
+          </SearchItem>
+          <SearchItem>
+            <SearchLabel>To Quarter</SearchLabel>
+            <SearchSelect
+              name="toQuarter"
+              id="ToQuarter"
+              value={state.toQuarter}
+              onChange={handleChange}
+            >
+              <option value="--">--</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </SearchSelect>
+          </SearchItem>
+          <SearchItem>
+            <SearchLabel>Prefecture</SearchLabel>
+            {loading ? (
+              "Loading..."
+            ) : (
+              <SearchSelect
+                name="area"
+                id="Area"
+                value={(state.area, state.code)}
+                onChange={handleChange}
+              >
+                {data.data.map(({ code, name }) => (
+                  <option key={code} value={code}>
+                    {name}
+                  </option>
+                ))}
+              </SearchSelect>
+            )}
+          </SearchItem>
+        </Wrapper>
         <div className="button-container">
           <button className="fetch-button" onClick={fetchData}>
             Search
@@ -50,16 +187,9 @@ function App() {
       </div>
       <div id="app-wrapper">
         <div className="app-contents">
-          {/* <Search /> */}
-
-          {/* Fetch data from API */}
-
           {/* Result Categories */}
           <div id="categories">
-            <span>
-              Property Type
-              <i class="fas fa-sort"></i>
-            </span>
+            <span>Property Type</span>
             <span>Zoning</span>
             <span>Municipality</span>
             <span>District Name</span>
@@ -97,8 +227,9 @@ function App() {
           </div>
         </div>
       </div>
+
       {/* Credit */}
-      <p style={{ fontSize: ".5em" }}>
+      <p className="footer">
         Data provided by https://www.land.mlit.go.jp/webland/
       </p>
     </div>
