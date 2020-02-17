@@ -13,27 +13,60 @@ function App() {
     );
     console.log(response.data);
     setListings(response.data);
+    displayHeaders();
+    scrollResults();
+  };
+
+  const displayHeaders = () => {
+    var headers = document.getElementById("categories");
+    if (headers.style.display === "none") {
+      headers.style.display = "grid";
+    } else {
+      headers.style.display = "grid";
+    }
+  };
+
+  const scrollResults = () => {
+    var scroller = document.getElementById("app-wrapper");
+
+    scroller.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <div className="App">
-      <Navigation />
-      <h1>RealJapan</h1>
-      <p>Search Japan Real Estate transactions!</p>
-      {/* {<Logo />
-      } */}
-      <div className="App-wrapper">
+      <div className="top">
+        <Navigation />
+        <div className="hero">
+          <h1 className="title">RealJapan</h1>
+          <p className="hero-text">Search Japan Real Estate transactions!</p>
+        </div>
+        {/* {<Logo />
+        } */}
+        <div className="button-container">
+          <button className="fetch-button" onClick={fetchData}>
+            Search
+          </button>
+        </div>
+      </div>
+      <div id="app-wrapper">
         {/* <Search /> */}
 
         {/* Fetch data from API */}
-        <div>
-          <button className="fetch-button" onClick={fetchData}>
-            Fetch Data
-          </button>
+
+        {/* Result Categories */}
+        <div id="categories">
+          <span>Property Type</span>
+          <span>Zoning</span>
+          <span>Municipality</span>
+          <span>District Name</span>
+          <span>Sale Price</span>
+          <span>Square Footage</span>
+          <span>Building Year</span>
+          <span>Transaction Period</span>
         </div>
 
         {/* Display data from API */}
-        <div className="listings">
+        <div className="listings-wrapper">
           {listings &&
             listings.data.map((listing, index) => {
               const cleanPrice = listing.TradePrice.split("")
@@ -45,15 +78,15 @@ function App() {
                 .join("");
 
               return (
-                <ul className="listing" key={index}>
-                  <li>Property Type: {listing.Type}</li>
-                  <li>Zoning: {listing.Region}</li>
-                  <li>City: {listing.Municipality}</li>
-                  <li>District: {listing.DistrictName}</li>
-                  <li>Price: {cleanPrice} Yen</li>
-                  <li>Square footage: {listing.Area}</li>
-                  <li>Year Built: {listing.BuildingYear}</li>
-                  <li>Period of Sale: {listing.Period}</li>
+                <ul className="listings" key={index}>
+                  <li className="listing">{listing.Type}</li>
+                  <li className="listing">{listing.Region}</li>
+                  <li className="listing">{listing.Municipality}</li>
+                  <li className="listing">{listing.DistrictName}</li>
+                  <li className="listing">{cleanPrice} Yen</li>
+                  <li className="listing">{listing.Area}</li>
+                  <li className="listing">{listing.BuildingYear}</li>
+                  <li className="listing">{listing.Period}</li>
                 </ul>
               );
             })}
