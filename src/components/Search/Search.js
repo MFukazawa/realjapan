@@ -164,8 +164,8 @@ function Search() {
       <SearchItem>
         <SearchLabel>Station</SearchLabel>
         <SearchSelect></SearchSelect>
-      </SearchItem>{" "}
-      } <button type="submit">Submit</button>
+      </SearchItem>
+      <button type="submit">Submit</button>
       <div className="listing">
         {listings &&
           listings.map((listing, index) => {

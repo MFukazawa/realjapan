@@ -48,6 +48,7 @@ function App() {
   });
 
   const [prefData, loading] = useFetch("../prefectures.json");
+
   const [cityData, cityLoading] = useFetch(
     `https://www.land.mlit.go.jp/webland_english/api/CitySearch?area=${state.code}`
   );
@@ -218,7 +219,7 @@ function App() {
             <span>Zoning</span>
             <span>Municipality</span>
             <span>District Name</span>
-            <span>Sale Price (Yen)</span>
+            <button>Sale Price (Yen)</button>
             <span>Area (m²)</span>
             <span>Year Built</span>
             <span>Period of Sale</span>
