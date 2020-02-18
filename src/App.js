@@ -120,14 +120,14 @@ function App() {
   const columns = useMemo(
     () => [
       {
-        Header: "Filler",
+        Header: "RealJapan Search Results",
         columns: [
           {
             Header: "Property Type",
             accessor: "Type"
           },
           {
-            Header: "Region",
+            Header: "Zoning",
             accessor: "Region"
           },
           {
@@ -135,28 +135,34 @@ function App() {
             accessor: "Municipality"
           },
           {
-            Header: "District Name",
+            Header: "District",
             accessor: "DistrictName"
-          }
-        ]
-      },
-      {
-        Header: "Filler",
-        columns: [
+          },
           {
-            Header: "Trade Price",
+            Header: "Sale Price (Yen)",
             accessor: "TradePrice"
           },
           {
-            Header: "Area",
+            Header: "Area (m2)",
             accessor: "Area"
           },
           {
-            Header: "Building Year",
-            accessor: "BuildingYear"
+            Header: "Building Age",
+            accessor: "BuildingYear",
+            Cell: ({ cell: { value } }) => {
+              const today = new Date();
+              const year = today.getFullYear();
+              console.log(year);
+              const age = year - value;
+              if (isNaN(age)) {
+                return null;
+              } else {
+                return <>{age}</>;
+              }
+            }
           },
           {
-            Header: "Period",
+            Header: "Sale Date",
             accessor: "Period"
           }
         ]
