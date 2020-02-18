@@ -89,16 +89,16 @@ function App() {
     console.log(response.data);
     setListings(response.data);
     setData(response.data.data);
-    // displayHeaders();
-    // scrollResults();
+    displayHeaders();
+    scrollResults();
   };
 
   const displayHeaders = () => {
-    var headers = document.getElementById("categories");
+    var headers = document.getElementById("app-contents");
     if (headers.style.display === "none") {
-      headers.style.display = "grid";
+      headers.style.display = "block";
     } else {
-      headers.style.display = "grid";
+      headers.style.display = "block";
     }
   };
 
@@ -290,12 +290,12 @@ function App() {
         </div>
       </div>
       <div id="app-wrapper">
-        <div className="app-contents">
+        <div id="app-contents" className="app-contents">
           <Styles>
             <Table columns={columns} data={data} />
           </Styles>
           {/* Result Categories */}
-          <div id="categories">
+          {/* <div id="categories">
             <span>Property Type</span>
             <span>Zoning</span>
             <span>Municipality</span>
@@ -304,7 +304,7 @@ function App() {
             <span>Area (m²)</span>
             <span>Year Built</span>
             <span>Period of Sale</span>
-          </div>
+          </div> */}
 
           {/* Display data from API */}
           {/* <div className="listings-wrapper">
