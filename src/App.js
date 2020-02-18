@@ -43,14 +43,18 @@ function App() {
     fromQuarter: "1",
     toQuarter: "1",
     area: "Miyazaki",
-    code: "45"
+    code: "45",
+    city: ""
   });
 
   const [prefData, loading] = useFetch("../prefectures.json");
+  const [cityData, cityLoading] = useFetch(
+    `https://www.land.mlit.go.jp/webland_english/api/CitySearch?area=${state.code}`
+  );
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=45`
+      `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=${state.code}&city=${state.city}`
     );
     console.log(response.data);
     setListings(response.data);
@@ -182,7 +186,22 @@ function App() {
           {/* Municipality */}
           <SearchItem>
             <SearchLabel>Municipality</SearchLabel>
-            <SearchSelect></SearchSelect>
+            {cityLoading ? (
+              "Loading..."
+            ) : (
+              <SearchSelect
+                name="city"
+                id="City"
+                value={(state.id, state.name)}
+                onChange={handleChange}
+              >
+                {cityData.data.map(({ id, name }) => (
+                  <option key={id} value={id}>
+                    {name}
+                  </option>
+                ))}
+              </SearchSelect>
+            )}
           </SearchItem>
         </Wrapper>
         <div className="button-container">
