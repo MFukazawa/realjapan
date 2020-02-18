@@ -1,11 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import axios from "axios";
 import Navigation from "./components/Navigation/Navigation";
 import "./App.css";
 import styled from "styled-components";
 import { useFetch } from "./components/Search/hooks";
+import Table from "./components/Table";
 
 // CSS Styles
+const Styles = styled.div`
+  padding: 1rem;
+  table {
+    margin: 0 auto;
+    border-spacing: 0;
+    border: 1px solid black;
+    tr {
+      :last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+    th,
+    td {
+      margin: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      :last-child {
+        border-right: 0;
+      }
+    }
+  }
+`;
+
 const Wrapper = styled.form`
   padding: 0 10%;
   background-color: rgba(255, 255, 255, 0.47);
@@ -47,6 +74,8 @@ function App() {
     city: ""
   });
 
+  const [data, setData] = useState([]);
+
   const [prefData, loading] = useFetch("../prefectures.json");
 
   const [cityData, cityLoading] = useFetch(
@@ -59,8 +88,9 @@ function App() {
     );
     console.log(response.data);
     setListings(response.data);
-    displayHeaders();
-    scrollResults();
+    setData(response.data.data);
+    // displayHeaders();
+    // scrollResults();
   };
 
   const displayHeaders = () => {
@@ -86,6 +116,54 @@ function App() {
     });
     console.log(value);
   }
+
+  const columns = useMemo(
+    () => [
+      {
+        Header: "Filler",
+        columns: [
+          {
+            Header: "Property Type",
+            accessor: "Type"
+          },
+          {
+            Header: "Region",
+            accessor: "Region"
+          },
+          {
+            Header: "Municipality",
+            accessor: "Municipality"
+          },
+          {
+            Header: "District Name",
+            accessor: "DistrictName"
+          }
+        ]
+      },
+      {
+        Header: "Filler",
+        columns: [
+          {
+            Header: "Trade Price",
+            accessor: "TradePrice"
+          },
+          {
+            Header: "Area",
+            accessor: "Area"
+          },
+          {
+            Header: "Building Year",
+            accessor: "BuildingYear"
+          },
+          {
+            Header: "Period",
+            accessor: "Period"
+          }
+        ]
+      }
+    ],
+    []
+  );
 
   return (
     <div className="App">
@@ -213,6 +291,9 @@ function App() {
       </div>
       <div id="app-wrapper">
         <div className="app-contents">
+          <Styles>
+            <Table columns={columns} data={data} />
+          </Styles>
           {/* Result Categories */}
           <div id="categories">
             <span>Property Type</span>
@@ -226,7 +307,7 @@ function App() {
           </div>
 
           {/* Display data from API */}
-          <div className="listings-wrapper">
+          {/* <div className="listings-wrapper">
             {listings &&
               listings.data.map((listing, index) => {
                 const cleanPrice = listing.TradePrice.split("")
@@ -250,7 +331,7 @@ function App() {
                   </ul>
                 );
               })}
-          </div>
+          </div> */}
         </div>
       </div>
 
