@@ -38,15 +38,15 @@ function App() {
   const [listings, setListings] = useState(null);
 
   const [state, setState] = useState({
-    fromYear: "--",
-    toYear: "--",
-    fromQuarter: "--",
-    toQuarter: "--",
+    fromYear: "2014",
+    toYear: "2014",
+    fromQuarter: "1",
+    toQuarter: "1",
     area: "Miyazaki",
     code: "45"
   });
 
-  const [data, loading] = useFetch("../prefectures.json");
+  const [prefData, loading] = useFetch("../prefectures.json");
 
   const fetchData = async () => {
     const response = await axios.get(
@@ -93,6 +93,7 @@ function App() {
         {/* {<Logo />
         } */}
         <Wrapper>
+          {/* From Year */}
           <SearchItem>
             <SearchLabel htmlFor="FromYear">From Year</SearchLabel>
             <SearchSelect
@@ -102,7 +103,6 @@ function App() {
               onChange={handleChange}
               required
             >
-              <option value="--">--</option>
               <option value="2014">2014</option>
               <option value="2015">2015</option>
               <option value="2016">2016</option>
@@ -111,6 +111,7 @@ function App() {
               <option value="2019">2019</option>
             </SearchSelect>
           </SearchItem>
+          {/* To Year */}
           <SearchItem>
             <SearchLabel>To Year</SearchLabel>
             <SearchSelect
@@ -120,7 +121,6 @@ function App() {
               onChange={handleChange}
               required
             >
-              <option value="--">--</option>
               <option value="2014">2014</option>
               <option value="2015">2015</option>
               <option value="2016">2016</option>
@@ -129,6 +129,7 @@ function App() {
               <option value="2019">2019</option>
             </SearchSelect>
           </SearchItem>
+          {/* From Quarter */}
           <SearchItem>
             <SearchLabel>From Quarter</SearchLabel>
             <SearchSelect
@@ -137,13 +138,13 @@ function App() {
               value={state.fromQuarter}
               onChange={handleChange}
             >
-              <option value="--">--</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
             </SearchSelect>
           </SearchItem>
+          {/* To Quarter */}
           <SearchItem>
             <SearchLabel>To Quarter</SearchLabel>
             <SearchSelect
@@ -152,13 +153,13 @@ function App() {
               value={state.toQuarter}
               onChange={handleChange}
             >
-              <option value="--">--</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
             </SearchSelect>
           </SearchItem>
+          {/* Prefecture */}
           <SearchItem>
             <SearchLabel>Prefecture</SearchLabel>
             {loading ? (
@@ -170,13 +171,18 @@ function App() {
                 value={(state.area, state.code)}
                 onChange={handleChange}
               >
-                {data.data.map(({ code, name }) => (
+                {prefData.data.map(({ code, name }) => (
                   <option key={code} value={code}>
                     {name}
                   </option>
                 ))}
               </SearchSelect>
             )}
+          </SearchItem>
+          {/* Municipality */}
+          <SearchItem>
+            <SearchLabel>Municipality</SearchLabel>
+            <SearchSelect></SearchSelect>
           </SearchItem>
         </Wrapper>
         <div className="button-container">
