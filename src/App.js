@@ -26,10 +26,37 @@ const Styles = styled.div`
       padding: 0.5rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
+      position: relative;
       :last-child {
         border-right: 0;
       }
     }
+    th {
+      padding: 0.5rem 1.3rem;
+      height: 35px;
+      :first-child {
+        padding: 0.5rem;
+      }
+    }
+  }
+  table tr:nth-child(even) {
+    background-color: #fff;
+  }
+  table th::before {
+    position: absolute;
+    right: 10px;
+    top: 23px;
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+  }
+  table th.sort-asc::before {
+    border-bottom: 5px solid #22543d;
+  }
+  table th.sort-desc::before {
+    border-top: 5px solid #22543d;
   }
 `;
 
@@ -62,8 +89,6 @@ const SearchSelect = styled.select`
 // End styles
 
 function App() {
-  const [listings, setListings] = useState(null);
-
   const [state, setState] = useState({
     fromYear: "2014",
     toYear: "2014",
@@ -78,20 +103,20 @@ function App() {
 
   const [prefData, loading] = useFetch("../prefectures.json");
 
-  const [cityData, cityLoading] = useFetch(
-    `https://www.land.mlit.go.jp/webland_english/api/CitySearch?area=${state.code}`
-  );
-
   const fetchData = async () => {
     const response = await axios.get(
       `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=${state.code}&city=${state.city}`
     );
-    console.log(listings);
-    setListings(response.data);
+    // console.log(response.data);
+    console.log(response);
     setData(response.data.data);
     displayHeaders();
     scrollResults();
   };
+
+  const [cityData, cityLoading] = useFetch(
+    `https://www.land.mlit.go.jp/webland_english/api/CitySearch?area=${state.code}`
+  );
 
   const displayHeaders = () => {
     var headers = document.getElementById("app-contents");
@@ -114,6 +139,7 @@ function App() {
       ...state,
       [event.target.name]: value
     });
+    console.log(value);
   }
 
   const columns = useMemo(
@@ -275,7 +301,7 @@ function App() {
               <SearchSelect
                 name="city"
                 id="City"
-                value={(state.id, state.name)}
+                value={state.city}
                 onChange={handleChange}
               >
                 {cityData.data.map(({ id, name }) => (
@@ -298,18 +324,6 @@ function App() {
           <Styles>
             <Table columns={columns} data={data} />
           </Styles>
-          {/* Result Categories */}
-          {/* <div id="categories">
-            <span>Property Type</span>
-            <span>Zoning</span>
-            <span>Municipality</span>
-            <span>District Name</span>
-            <button>Sale Price (Yen)</button>
-            <span>Area (m²)</span>
-            <span>Year Built</span>
-            <span>Period of Sale</span>
-          </div> */}
-
           {/* Display data from API */}
           {/* <div className="listings-wrapper">
             {listings &&
@@ -321,21 +335,7 @@ function App() {
                   )
                   .reverse()
                   .join("");
-
-                return (
-                  <ul className="listings" key={index}>
-                    <li className="listing">{listing.Type}</li>
-                    <li className="listing">{listing.Region}</li>
-                    <li className="listing">{listing.Municipality}</li>
-                    <li className="listing">{listing.DistrictName}</li>
-                    <li className="listing">{cleanPrice}</li>
-                    <li className="listing">{listing.Area}</li>
-                    <li className="listing">{listing.BuildingYear}</li>
-                    <li className="listing">{listing.Period}</li>
-                  </ul>
-                );
-              })}
-          </div> */}
+          */}
         </div>
       </div>
 

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useTable, useFilters } from "react-table";
+import { useTable, useFilters, useSortBy } from "react-table";
 import styled from "styled-components";
 
 const Searchbox = styled.input`
-  width: 50%;
+  padding: 10px;
+  width: 30%;
   border-radius: 5px;
   height: 30px;
   font-size: 16px;
@@ -25,7 +26,8 @@ export default function Table({ columns, data }) {
       columns,
       data
     },
-    useFilters
+    useFilters,
+    useSortBy
   );
 
   const [filterInput, setFilterInput] = useState("");
@@ -49,7 +51,18 @@ export default function Table({ columns, data }) {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  className={
+                    column.isSorted
+                      ? column.isSortedDesc
+                        ? "sort-desc"
+                        : "sort-asc"
+                      : ""
+                  }
+                >
+                  {column.render("Header")}
+                </th>
               ))}
             </tr>
           ))}
