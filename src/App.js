@@ -86,7 +86,7 @@ function App() {
     const response = await axios.get(
       `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=${state.code}&city=${state.city}`
     );
-    console.log(response.data);
+    console.log(listings);
     setListings(response.data);
     setData(response.data.data);
     displayHeaders();
@@ -114,7 +114,6 @@ function App() {
       ...state,
       [event.target.name]: value
     });
-    console.log(value);
   }
 
   const columns = useMemo(
@@ -152,7 +151,6 @@ function App() {
             Cell: ({ cell: { value } }) => {
               const today = new Date();
               const year = today.getFullYear();
-              console.log(year);
               const age = year - value;
               if (isNaN(age)) {
                 return null;
