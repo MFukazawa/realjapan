@@ -1,5 +1,16 @@
 import React, { useState } from "react";
 import { useTable, useFilters } from "react-table";
+import styled from "styled-components";
+
+const Searchbox = styled.input`
+  width: 50%;
+  border-radius: 5px;
+  height: 30px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid black;
+  margin: 0 0 20px 0;
+`;
 
 export default function Table({ columns, data }) {
   const {
@@ -28,11 +39,11 @@ export default function Table({ columns, data }) {
 
   return (
     <>
-      <input
+      <Searchbox
         value={filterInput}
         onChange={handleFilterChange}
         placeholder={"Search District"}
-      />
+      ></Searchbox>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
