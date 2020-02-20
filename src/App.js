@@ -94,7 +94,6 @@ function App() {
     toYear: "2014",
     fromQuarter: "1",
     toQuarter: "1",
-    area: "Miyazaki",
     code: "45",
     city: ""
   });
@@ -107,8 +106,6 @@ function App() {
     const response = await axios.get(
       `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=${state.code}&city=${state.city}`
     );
-    // console.log(response.data);
-    console.log(response);
     setData(response.data.data);
     displayHeaders();
     scrollResults();
@@ -139,8 +136,9 @@ function App() {
       ...state,
       [event.target.name]: value
     });
-    console.log(value);
   }
+
+  const jpNumberFormat = new Intl.NumberFormat("ja-JP");
 
   const columns = useMemo(
     () => [
@@ -165,7 +163,10 @@ function App() {
           },
           {
             Header: "Sale Price (Yen)",
-            accessor: "TradePrice"
+            accessor: "TradePrice",
+            Cell: ({ cell: { value } }) => {
+              return jpNumberFormat.format(value);
+            }
           },
           {
             Header: "Area (m2)",
@@ -179,7 +180,7 @@ function App() {
               const year = today.getFullYear();
               const age = year - value;
               if (isNaN(age)) {
-                return null;
+                return "-";
               } else {
                 return <>{age}</>;
               }
@@ -192,7 +193,7 @@ function App() {
         ]
       }
     ],
-    []
+    [jpNumberFormat]
   );
 
   return (
@@ -279,9 +280,9 @@ function App() {
               "Loading..."
             ) : (
               <SearchSelect
-                name="area"
-                id="Area"
-                value={(state.area, state.code)}
+                name="code"
+                id="Code"
+                value={state.code}
                 onChange={handleChange}
               >
                 {prefData.data.map(({ code, name }) => (
