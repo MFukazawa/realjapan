@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { useFetch } from "./hooks";
-// import Area from "./Area";
+import axios from "axios";
+import { searchResults } from "../../containers/App";
 
-// CSS Styles
 const Wrapper = styled.form`
   padding: 0 10%;
+  background-color: rgba(255, 255, 255, 0.47);
+  border-radius: 10px;
+  width: 300px;
+  margin: 0 auto;
 `;
 
 const SearchLabel = styled.label`
@@ -26,23 +30,18 @@ const SearchSelect = styled.select`
   -moz-text-align-last: center;
 `;
 
-// End styles
+// End CSS
 
-//
-
-function Search() {
+const Form = () => {
   const [state, setState] = useState({
     fromYear: "2014",
     toYear: "2014",
     fromQuarter: "1",
     toQuarter: "1",
-    area: "Hokkaido",
-    listings: []
+    code: "45",
+    city: "",
+    unitPrice: ""
   });
-
-  const [listings, setListings] = useState(null);
-
-  const [data, loading] = useFetch("../prefectures.json");
 
   function handleChange(event) {
     const value = event.target.value;
@@ -52,28 +51,42 @@ function Search() {
     });
   }
 
-  function submitForm(e) {
+  const { setData } = useContext(searchResults);
+
+  const [prefData, loading] = useFetch("../prefectures.json");
+
+  const [cityData, cityLoading] = useFetch(
+    `https://www.land.mlit.go.jp/webland_english/api/CitySearch?area=${state.code}`
+  );
+
+  const fetchData = async e => {
     e.preventDefault();
-    fetch(
-      "https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=20161&to=20163&area=45"
-      // `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${fromYear.value}${fromQuarter}&to=${toYear}${toQuarter}&area=${area}`,
-      // {
-      //   method: "POST",
-      //   body: JSON.stringify(this.state.value),
-      //   headers: {
-      //     "Content-type": "application/json"
-      //   }
-      // }
-    )
-      .then(res => res.json())
-      .then(data => {
-        setListings(data);
-        console.log(data);
-      });
-  }
+    const response = await axios.get(
+      `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=${state.code}&city=${state.city}`
+    );
+    setData(response.data.data);
+    displayHeaders();
+    scrollResults();
+  };
+
+  const displayHeaders = () => {
+    var headers = document.getElementById("app-contents");
+    if (headers.style.display === "none") {
+      headers.style.display = "block";
+    } else {
+      headers.style.display = "block";
+    }
+  };
+
+  const scrollResults = () => {
+    var scroller = document.getElementById("app-wrapper");
+
+    scroller.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <Wrapper onSubmit={submitForm}>
+    <Wrapper>
+      {/* From Year */}
       <SearchItem>
         <SearchLabel htmlFor="FromYear">From Year</SearchLabel>
         <SearchSelect
@@ -83,7 +96,6 @@ function Search() {
           onChange={handleChange}
           required
         >
-          <option value="--">--</option>
           <option value="2014">2014</option>
           <option value="2015">2015</option>
           <option value="2016">2016</option>
@@ -92,6 +104,7 @@ function Search() {
           <option value="2019">2019</option>
         </SearchSelect>
       </SearchItem>
+      {/* To Year */}
       <SearchItem>
         <SearchLabel>To Year</SearchLabel>
         <SearchSelect
@@ -101,7 +114,6 @@ function Search() {
           onChange={handleChange}
           required
         >
-          <option value="--">--</option>
           <option value="2014">2014</option>
           <option value="2015">2015</option>
           <option value="2016">2016</option>
@@ -110,6 +122,7 @@ function Search() {
           <option value="2019">2019</option>
         </SearchSelect>
       </SearchItem>
+      {/* From Quarter */}
       <SearchItem>
         <SearchLabel>From Quarter</SearchLabel>
         <SearchSelect
@@ -118,13 +131,13 @@ function Search() {
           value={state.fromQuarter}
           onChange={handleChange}
         >
-          <option value="--">--</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
         </SearchSelect>
       </SearchItem>
+      {/* To Quarter */}
       <SearchItem>
         <SearchLabel>To Quarter</SearchLabel>
         <SearchSelect
@@ -133,55 +146,60 @@ function Search() {
           value={state.toQuarter}
           onChange={handleChange}
         >
-          <option value="--">--</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
           <option value="4">4</option>
         </SearchSelect>
       </SearchItem>
+      {/* Prefecture */}
       <SearchItem>
-        <SearchLabel>Area</SearchLabel>
+        <SearchLabel>Prefecture</SearchLabel>
         {loading ? (
           "Loading..."
         ) : (
           <SearchSelect
-            name="area"
-            id="Area"
-            value={state.area}
+            name="code"
+            id="Code"
+            value={state.code}
             onChange={handleChange}
           >
-            {data.data.map(({ code, name }) => (
-              <option key={code}>{name}</option>
+            {prefData.data.map(({ code, name }) => (
+              <option key={code} value={code}>
+                {name}
+              </option>
             ))}
           </SearchSelect>
         )}
       </SearchItem>
+      {/* Municipality */}
       <SearchItem>
-        <SearchLabel>City</SearchLabel>
-        <City />
+        <SearchLabel>Municipality</SearchLabel>
+        {cityLoading ? (
+          "Loading..."
+        ) : (
+          <SearchSelect
+            name="city"
+            id="City"
+            value={state.city}
+            onChange={handleChange}
+          >
+            <option>All</option>
+            {cityData.data.map(({ id, name }) => (
+              <option key={id} value={id}>
+                {name}
+              </option>
+            ))}
+          </SearchSelect>
+        )}
       </SearchItem>
-      <SearchItem>
-        <SearchLabel>Station</SearchLabel>
-        <SearchSelect></SearchSelect>
-      </SearchItem>
-      <button type="submit">Submit</button>
-      <div className="listing">
-        {listings &&
-          listings.map((listing, index) => {
-            return (
-              <ul className="listing" key="index">
-                <li>{listing.Type}</li>
-                <li>{listing.Region}</li>
-                <li>{listing.Municipality}</li>
-                <li>{listing.DistrictName}</li>
-                <li>{listing.TradePrice}</li>
-              </ul>
-            );
-          })}
+      <div className="button-container">
+        <button className="fetch-button" onClick={fetchData}>
+          Search
+        </button>
       </div>
     </Wrapper>
   );
-}
+};
 
-export default Search;
+export default Form;

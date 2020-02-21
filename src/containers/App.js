@@ -1,10 +1,10 @@
 import React, { useState, useMemo, createContext } from "react";
-import Navigation from "./components/Navigation/Navigation";
-import Form from "./components/Form";
+import Navigation from "../components/Navigation/Navigation";
+import Form from "../components/Form/Form";
 import "./App.css";
 import styled from "styled-components";
 // import { useFetch } from "./components/Search/hooks";
-import Table from "./components/Table";
+import Table from "../components/Form/Table";
 
 // CSS Styles
 const Styles = styled.div`
@@ -30,6 +30,7 @@ const Styles = styled.div`
       :last-child {
         border-right: 0;
       }
+      font-size: 13px;
     }
     th {
       padding: 0.5rem 1.3rem;
@@ -97,6 +98,17 @@ function App() {
             accessor: "TradePrice",
             Cell: ({ cell: { value } }) => {
               return jpNumberFormat.format(value);
+            }
+          },
+          {
+            Header: "Price per m2",
+            accessor: "UnitPrice",
+            Cell: ({ cell: { value } }) => {
+              if (isNaN(value)) {
+                return "-";
+              } else {
+                return jpNumberFormat.format(value);
+              }
             }
           },
           {
