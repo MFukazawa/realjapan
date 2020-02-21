@@ -47,7 +47,7 @@
 }
 
 .fetch-button {
-  width: 200px;
+  width: 250px;
   height: 50px;
   border-radius: 10px;
   font-size: 18px;
@@ -56,6 +56,13 @@
   box-shadow: 36px 36px 68px #b3b3b3, -36px -36px 68px #ffffff;
   border-radius: 10px;
   background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-text {
+  position: absolute;
 }
 
 #categories {

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useFetch } from "./hooks";
 import axios from "axios";
 import { searchResults } from "../../containers/App";
+import Spinner from "../Spinner";
 
 const Wrapper = styled.form`
   padding: 0 10%;
@@ -53,6 +54,8 @@ const Form = () => {
 
   const { setData } = useContext(searchResults);
 
+  const [loadingData, setLoadingData] = useState(false);
+
   const [prefData, loading] = useFetch("../prefectures.json");
 
   const [cityData, cityLoading] = useFetch(
@@ -61,12 +64,18 @@ const Form = () => {
 
   const fetchData = async e => {
     e.preventDefault();
-    const response = await axios.get(
-      `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=${state.code}&city=${state.city}`
-    );
-    setData(response.data.data);
-    displayHeaders();
-    scrollResults();
+    setLoadingData(true);
+    try {
+      const response = await axios.get(
+        `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=${state.code}&city=${state.city}`
+      );
+      setData(response.data.data);
+      displayHeaders();
+      scrollResults();
+      setLoadingData(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const displayHeaders = () => {
@@ -195,7 +204,12 @@ const Form = () => {
       </SearchItem>
       <div className="button-container">
         <button className="fetch-button" onClick={fetchData}>
-          Search
+          <span className="button-text">Search</span>
+          {loadingData && (
+            <span>
+              <Spinner />
+            </span>
+          )}
         </button>
       </div>
     </Wrapper>
