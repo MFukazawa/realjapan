@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useFetch } from "./hooks";
 import axios from "axios";
 import { searchResults } from "../../containers/App";
-import Spinner from "../Spinner";
+import Spinner from "./Spinner";
 
 const Wrapper = styled.form`
   padding: 0 10%;
