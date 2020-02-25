@@ -11,12 +11,12 @@ import styled from "styled-components";
 const Nav = styled.nav`
   font-size: 1.5em;
   text-align: right;
-  padding: 2em;
+  padding: 1em;
 `;
 
 const Link = styled.a`
   text-decoration: none;
-  color: cornflowerblue;
+  color: #3400ff;
 `;
 
 const Navigation = () => {

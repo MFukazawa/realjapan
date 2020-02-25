@@ -3,7 +3,6 @@ import Navigation from "../components/Navigation/Navigation";
 import Form from "../components/Form/Form";
 import "./App.css";
 import styled from "styled-components";
-// import { useFetch } from "./components/Search/hooks";
 import Table from "../components/Form/Table";
 
 // CSS Styles

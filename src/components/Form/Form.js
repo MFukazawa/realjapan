@@ -9,13 +9,13 @@ const Wrapper = styled.form`
   padding: 0 10%;
   background-color: rgba(255, 255, 255, 0.47);
   border-radius: 10px;
-  width: 300px;
+  width: 350px;
   margin: 0 auto;
   position: relative;
 `;
 
 const SearchLabel = styled.label`
-  font-size: 1em;
+  font-size: 1.2em;
 `;
 
 const SearchItem = styled.div`
@@ -26,6 +26,7 @@ const SearchItem = styled.div`
 `;
 
 const SearchSelect = styled.select`
+  font-size: 1.2em;
   text-align-last: center;
   text-align: center;
   -ms-text-align-last: center;
