@@ -157,6 +157,7 @@ const Form = () => {
           <option value="2019">2019</option>
         </SearchSelect>
       </SearchItem>
+
       {/* To Year */}
       <SearchItem>
         <SearchLabel>To Year</SearchLabel>
@@ -175,6 +176,7 @@ const Form = () => {
           <option value="2019">2019</option>
         </SearchSelect>
       </SearchItem>
+
       {/* From Quarter */}
       <Invalid id="invalidQuarter">Not a valid selection</Invalid>
       <SearchItem>
@@ -191,6 +193,7 @@ const Form = () => {
           <option value="4">4</option>
         </SearchSelect>
       </SearchItem>
+
       {/* To Quarter */}
       <SearchItem>
         <SearchLabel>To Quarter</SearchLabel>
@@ -206,6 +209,7 @@ const Form = () => {
           <option value="4">4</option>
         </SearchSelect>
       </SearchItem>
+
       {/* Prefecture */}
       <SearchItem>
         <SearchLabel>Prefecture</SearchLabel>
@@ -226,6 +230,7 @@ const Form = () => {
           </SearchSelect>
         )}
       </SearchItem>
+
       {/* Municipality */}
       <SearchItem>
         <SearchLabel>Municipality</SearchLabel>
@@ -247,6 +252,7 @@ const Form = () => {
           </SearchSelect>
         )}
       </SearchItem>
+
       <div className="button-container">
         <button className="fetch-button" onClick={fetchData}>
           <span className="button-text">Search</span>
