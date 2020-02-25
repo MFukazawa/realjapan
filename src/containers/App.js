@@ -39,6 +39,13 @@ const Styles = styled.div`
         padding: 0.5rem;
       }
     }
+    th:hover {
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      box-shadow: inset 0 0 0 4px #1995b9, 0 0 1px rgba(0, 0, 0, 0);
+      transition: all 0.3s;
+    }
   }
   table tr:nth-child(even) {
     background-color: #fff;
@@ -75,65 +82,60 @@ function App() {
   const columns = useMemo(
     () => [
       {
-        Header: "RealJapan Search Results",
-        columns: [
-          {
-            Header: "Property Type",
-            accessor: "Type"
-          },
-          {
-            Header: "Zoning",
-            accessor: "Region"
-          },
-          {
-            Header: "Municipality",
-            accessor: "Municipality"
-          },
-          {
-            Header: "District",
-            accessor: "DistrictName"
-          },
-          {
-            Header: "Sale Price (Yen)",
-            accessor: "TradePrice",
-            Cell: ({ cell: { value } }) => {
-              return jpNumberFormat.format(value);
-            }
-          },
-          {
-            Header: "Price per m2",
-            accessor: "UnitPrice",
-            Cell: ({ cell: { value } }) => {
-              if (isNaN(value)) {
-                return "-";
-              } else {
-                return jpNumberFormat.format(value);
-              }
-            }
-          },
-          {
-            Header: "Area (m2)",
-            accessor: "Area"
-          },
-          {
-            Header: "Building Age",
-            accessor: "BuildingYear",
-            Cell: ({ cell: { value } }) => {
-              const today = new Date();
-              const year = today.getFullYear();
-              const age = year - value;
-              if (isNaN(age)) {
-                return "-";
-              } else {
-                return <>{age}</>;
-              }
-            }
-          },
-          {
-            Header: "Sale Date",
-            accessor: "Period"
+        Header: "Property Type",
+        accessor: "Type"
+      },
+      {
+        Header: "Zoning",
+        accessor: "Region"
+      },
+      {
+        Header: "Municipality",
+        accessor: "Municipality"
+      },
+      {
+        Header: "District",
+        accessor: "DistrictName"
+      },
+      {
+        Header: "Sale Price (Yen)",
+        accessor: "TradePrice",
+        Cell: ({ cell: { value } }) => {
+          return jpNumberFormat.format(value);
+        }
+      },
+      {
+        Header: "Price per m2",
+        accessor: "UnitPrice",
+        Cell: ({ cell: { value } }) => {
+          if (isNaN(value)) {
+            return "-";
+          } else {
+            return jpNumberFormat.format(value);
           }
-        ]
+        }
+      },
+      {
+        Header: "Area (m2)",
+        accessor: "Area"
+      },
+      {
+        Header: "Building Age",
+        accessor: "BuildingYear",
+        Cell: ({ cell: { value } }) => {
+          const today = new Date();
+          const year = today.getFullYear();
+          const age = year - value;
+          if (isNaN(age)) {
+            return "-";
+          } else {
+            return <>{age}</>;
+          }
+        }
+      },
+      {
+        Header: "Sale Date",
+        accessor: "Period"
       }
     ],
     [jpNumberFormat]
