@@ -11,6 +11,7 @@ const Wrapper = styled.form`
   border-radius: 10px;
   width: 300px;
   margin: 0 auto;
+  position: relative;
 `;
 
 const SearchLabel = styled.label`
@@ -29,6 +30,32 @@ const SearchSelect = styled.select`
   text-align: center;
   -ms-text-align-last: center;
   -moz-text-align-last: center;
+`;
+
+const Invalid = styled.div`
+  color: white;
+  background-color: rgba(233, 26, 26, 0.88);
+  width: 170px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 0.4em;
+  position: absolute;
+  right: -100px;
+  display: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-right-color: rgba(233, 26, 26, 0.88);
+    border-left: 0;
+    margin-top: -7px;
+    margin-left: -8px;
+  }
 `;
 
 // End CSS
@@ -63,6 +90,21 @@ const Form = () => {
   );
 
   const fetchData = async e => {
+    var fromYear = document.getElementById("FromYear").value;
+    var toYear = document.getElementById("ToYear").value;
+    var fromQuarter = document.getElementById("FromQuarter").value;
+    var toQuarter = document.getElementById("ToQuarter").value;
+
+    if (fromYear > toYear) {
+      document.getElementById("invalidYear").style.display = "inline-block";
+      return false;
+    }
+
+    if (fromQuarter > toQuarter) {
+      document.getElementById("invalidQuarter").style.display = "inline-block";
+      return false;
+    }
+
     e.preventDefault();
     setLoadingData(true);
     try {
@@ -96,6 +138,7 @@ const Form = () => {
   return (
     <Wrapper>
       {/* From Year */}
+      <Invalid id="invalidYear">Not a valid selection</Invalid>
       <SearchItem>
         <SearchLabel htmlFor="FromYear">From Year</SearchLabel>
         <SearchSelect
@@ -132,6 +175,7 @@ const Form = () => {
         </SearchSelect>
       </SearchItem>
       {/* From Quarter */}
+      <Invalid id="invalidQuarter">Not a valid selection</Invalid>
       <SearchItem>
         <SearchLabel>From Quarter</SearchLabel>
         <SearchSelect
