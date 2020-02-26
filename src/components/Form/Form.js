@@ -5,62 +5,6 @@ import axios from "axios";
 import { searchResults } from "../../containers/App";
 import Spinner from "./Spinner";
 
-const Wrapper = styled.form`
-  padding: 0 10%;
-  background-color: rgba(255, 255, 255, 0.47);
-  border-radius: 10px;
-  width: 350px;
-  margin: 0 auto;
-  position: relative;
-`;
-
-const SearchLabel = styled.label`
-  font-size: 1.2em;
-`;
-
-const SearchItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em 0;
-`;
-
-const SearchSelect = styled.select`
-  font-size: 1.2em;
-  text-align-last: center;
-  text-align: center;
-  -ms-text-align-last: center;
-  -moz-text-align-last: center;
-`;
-
-const Invalid = styled.div`
-  color: white;
-  background-color: rgba(233, 26, 26, 0.88);
-  width: 170px;
-  height: 50px;
-  line-height: 50px;
-  border-radius: 0.4em;
-  position: absolute;
-  right: -100px;
-  display: none;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 0;
-    height: 0;
-    border: 8px solid transparent;
-    border-right-color: rgba(233, 26, 26, 0.88);
-    border-left: 0;
-    margin-top: -7px;
-    margin-left: -8px;
-  }
-`;
-
-// End CSS
-
 const Form = () => {
   const [state, setState] = useState({
     fromYear: "2014",
@@ -266,5 +210,61 @@ const Form = () => {
     </Wrapper>
   );
 };
+
+const Wrapper = styled.form`
+  padding: 0 10%;
+  background-color: rgba(255, 255, 255, 0.47);
+  border-radius: 10px;
+  width: 350px;
+  margin: 0 auto;
+  position: relative;
+`;
+
+const SearchLabel = styled.label`
+  font-size: 1.2em;
+`;
+
+const SearchItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 0;
+`;
+
+const SearchSelect = styled.select`
+  font-size: 1.2em;
+  text-align-last: center;
+  text-align: center;
+  -ms-text-align-last: center;
+  -moz-text-align-last: center;
+`;
+
+const Invalid = styled.div`
+  color: white;
+  background-color: rgba(233, 26, 26, 0.88);
+  width: 170px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 0.4em;
+  position: absolute;
+  right: -100px;
+  display: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-right-color: rgba(233, 26, 26, 0.88);
+    border-left: 0;
+    margin-top: -7px;
+    margin-left: -8px;
+  }
+`;
+
+// End CSS
 
 export default Form;
