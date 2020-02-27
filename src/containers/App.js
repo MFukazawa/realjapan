@@ -20,6 +20,22 @@ const {
 function App() {
   const jpNumberFormat = new Intl.NumberFormat("ja-JP");
   const [data, setData] = useState([]);
+  const CustomizedAxisTick = ({ x, y, payload }) => {
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text
+          x={0}
+          y={0}
+          dy={16}
+          textAnchor="end"
+          fill="#666"
+          transform="rotate(-35)"
+        >
+          {payload.value}
+        </text>
+      </g>
+    );
+  };
 
   const columns = useMemo(
     () => [
@@ -51,7 +67,7 @@ function App() {
         accessor: "UnitPrice",
         Cell: ({ cell: { value } }) => {
           if (isNaN(value)) {
-            return "-";
+            return "0";
           } else {
             return jpNumberFormat.format(value);
           }
@@ -107,7 +123,11 @@ function App() {
             data={data}
           >
             <CartesianGrid strokeDasharray="4 4" />
-            <XAxis name="District" dataKey={"District"} tick={"District"} />
+            <XAxis
+              name="District"
+              dataKey={"DistrictName"}
+              tick={<CustomizedAxisTick />}
+            />
             <YAxis
               name="Price per Square Meter"
               dataKey="UnitPrice"

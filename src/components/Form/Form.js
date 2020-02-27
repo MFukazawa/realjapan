@@ -22,7 +22,6 @@ const Form = () => {
       ...state,
       [event.target.name]: value
     });
-    console.log(value);
   }
 
   const { setData } = useContext(searchResults);
