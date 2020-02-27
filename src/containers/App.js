@@ -36,6 +36,13 @@ function App() {
       </g>
     );
   };
+  const UnitPriceNum = ({ UnitPrice }) => {
+    if (isNaN(UnitPrice)) {
+      return 0;
+    } else if (UnitPrice > 0) {
+      return UnitPrice;
+    }
+  };
 
   const columns = useMemo(
     () => [
@@ -118,22 +125,26 @@ function App() {
           </Styles>
           <BarChart
             width={1000}
-            height={500}
+            height={5000}
             margin={{ top: 20, right: 100, bottom: 20, left: 100 }}
             data={data}
+            layout="vertical"
           >
             <CartesianGrid strokeDasharray="4 4" />
             <XAxis
-              name="District"
-              dataKey={"DistrictName"}
-              tick={<CustomizedAxisTick />}
-            />
-            <YAxis
               name="Price per Square Meter"
-              dataKey="UnitPrice"
+              dataKey={UnitPriceNum}
               type="number"
               domain={[0, "dataMax"]}
               allowDataOverflow={true}
+            />
+            <YAxis
+              name="District"
+              dataKey={"DistrictName"}
+              tick={<CustomizedAxisTick />}
+              interval="preserveStart"
+              type="category"
+              allowDuplicatedCategory="false"
             />
             <Tooltip cursor={{ strokeDasharray: "3 3" }} />
             <Legend />
