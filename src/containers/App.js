@@ -3,8 +3,19 @@ import Navigation from "../components/Navigation/Navigation";
 import Form from "../components/Form/Form";
 import "./App.css";
 import styled from "styled-components";
+import * as Recharts from "recharts";
 import Table from "../components/Form/Table";
-import Chart from "../components/Chart/Chart";
+// import Chart from "../components/Chart/Chart";
+
+const {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} = Recharts;
 
 function App() {
   const jpNumberFormat = new Intl.NumberFormat("ja-JP");
@@ -89,7 +100,29 @@ function App() {
           <Styles>
             <Table columns={columns} data={data} />
           </Styles>
-          <Chart columns={columns} data={data} />
+          <BarChart
+            width={1000}
+            height={500}
+            margin={{ top: 20, right: 100, bottom: 20, left: 100 }}
+            data={data}
+          >
+            <CartesianGrid strokeDasharray="4 4" />
+            <XAxis name="District" dataKey={"District"} tick={"District"} />
+            <YAxis
+              name="Price per Square Meter"
+              dataKey="UnitPrice"
+              type="number"
+              domain={[0, "dataMax"]}
+              allowDataOverflow={true}
+            />
+            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+            <Legend />
+            <Bar
+              name="Price per Square Meter"
+              dataKey="UnitPrice"
+              fill="blue"
+            ></Bar>
+          </BarChart>
         </div>
       </div>
 

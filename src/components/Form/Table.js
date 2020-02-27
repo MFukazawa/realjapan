@@ -24,7 +24,6 @@ export default function Table({ columns, data }) {
   const handleFilterChange = event => {
     const value = event.target.value || "";
     setFilter("DistrictName", value);
-    console.log(value);
     setFilterInput(value);
   };
 

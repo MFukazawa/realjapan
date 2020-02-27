@@ -22,6 +22,7 @@ const Form = () => {
       ...state,
       [event.target.name]: value
     });
+    console.log(value);
   }
 
   const { setData } = useContext(searchResults);
@@ -187,7 +188,7 @@ const Form = () => {
             value={state.city}
             onChange={handleChange}
           >
-            <option>All</option>
+            <option value={""}>All</option>
             {cityData.data.map(({ id, name }) => (
               <option key={id} value={id}>
                 {name}
