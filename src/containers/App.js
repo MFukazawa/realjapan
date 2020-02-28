@@ -36,12 +36,23 @@ function App() {
       </g>
     );
   };
+
   const UnitPriceNum = ({ UnitPrice }) => {
     if (isNaN(UnitPrice)) {
       return 0;
     } else if (UnitPrice > 0) {
       return UnitPrice;
     }
+  };
+
+  const MaxY = ({ UnitPrice, i }) => {
+    let max;
+    for (i = 0; i < UnitPrice.length; i++) {
+      if (UnitPrice[i] > max) {
+        max = UnitPrice[i];
+      }
+    }
+    return max;
   };
 
   const columns = useMemo(
@@ -126,7 +137,7 @@ function App() {
           <BarChart
             width={1000}
             height={5000}
-            margin={{ top: 20, right: 100, bottom: 20, left: 100 }}
+            margin={{ top: 100, right: 100, bottom: 100, left: 250 }}
             data={data}
             layout="vertical"
           >
@@ -135,12 +146,12 @@ function App() {
               name="Price per Square Meter"
               dataKey={UnitPriceNum}
               type="number"
-              domain={[0, "dataMax"]}
+              domain={[0, 500000]}
               allowDataOverflow={true}
             />
             <YAxis
               name="District"
-              dataKey={"DistrictName"}
+              dataKey="DistrictName"
               tick={<CustomizedAxisTick />}
               interval="preserveStart"
               type="category"
