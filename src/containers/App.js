@@ -3,57 +3,12 @@ import Navigation from "../components/Navigation/Navigation";
 import Form from "../components/Form/Form";
 import "./App.css";
 import styled from "styled-components";
-import * as Recharts from "recharts";
 import Table from "../components/Form/Table";
-// import Chart from "../components/Chart/Chart";
-
-const {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
-} = Recharts;
+import Chart from "../components/Chart/Chart";
 
 function App() {
   const jpNumberFormat = new Intl.NumberFormat("ja-JP");
   const [data, setData] = useState([]);
-  const CustomizedAxisTick = ({ x, y, payload }) => {
-    return (
-      <g transform={`translate(${x},${y})`}>
-        <text
-          x={0}
-          y={0}
-          dy={16}
-          textAnchor="end"
-          fill="#666"
-          transform="rotate(-35)"
-        >
-          {payload.value}
-        </text>
-      </g>
-    );
-  };
-
-  const UnitPriceNum = ({ UnitPrice }) => {
-    if (isNaN(UnitPrice)) {
-      return 0;
-    } else if (UnitPrice > 0) {
-      return UnitPrice;
-    }
-  };
-
-  const MaxY = ({ UnitPrice, i }) => {
-    let max;
-    for (i = 0; i < UnitPrice.length; i++) {
-      if (UnitPrice[i] > max) {
-        max = UnitPrice[i];
-      }
-    }
-    return max;
-  };
 
   const columns = useMemo(
     () => [
@@ -134,44 +89,12 @@ function App() {
           <Styles>
             <Table columns={columns} data={data} />
           </Styles>
-          <BarChart
-            width={1000}
-            height={5000}
-            margin={{ top: 100, right: 100, bottom: 100, left: 250 }}
-            data={data}
-            layout="vertical"
-          >
-            <CartesianGrid strokeDasharray="4 4" />
-            <XAxis
-              name="Price per Square Meter"
-              dataKey={UnitPriceNum}
-              type="number"
-              domain={[0, 500000]}
-              allowDataOverflow={true}
-            />
-            <YAxis
-              name="District"
-              dataKey="DistrictName"
-              tick={<CustomizedAxisTick />}
-              interval="preserveStart"
-              type="category"
-              allowDuplicatedCategory="false"
-            />
-            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-            <Legend />
-            <Bar
-              name="Price per Square Meter"
-              dataKey="UnitPrice"
-              fill="blue"
-            ></Bar>
-          </BarChart>
+          <Chart data={data} />
         </div>
       </div>
-
-      {/* Credit */}
-      <p className="footer">
+      <div className="footer">
         Data provided by https://www.land.mlit.go.jp/webland/
-      </p>
+      </div>
     </div>
   );
 }
