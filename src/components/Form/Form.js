@@ -40,6 +40,7 @@ const Form = () => {
     var fromQuarter = document.getElementById("FromQuarter").value;
     var toQuarter = document.getElementById("ToQuarter").value;
 
+    // Year & Quarter validation
     if (fromYear > toYear) {
       document.getElementById("invalidYear").style.display = "inline-block";
       return false;
