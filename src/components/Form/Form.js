@@ -57,7 +57,17 @@ const Form = () => {
       const response = await axios.get(
         `https://www.land.mlit.go.jp/webland_english/api/TradeListSearch?from=${state.fromYear}${state.fromQuarter}&to=${state.toYear}${state.toQuarter}&area=${state.code}&city=${state.city}`
       );
-      setData(response.data.data);
+      let formattedData = response.data.data.map(result => {
+        var Obj = { ...result };
+        if ("UnitPrice" in result) {
+          Obj["UnitPrice"] = parseInt(result["UnitPrice"], 10);
+        } else {
+          Obj["UnitPrice"] = 0;
+        }
+
+        return Obj;
+      });
+      setData(formattedData);
       displayHeaders();
       scrollResults();
       setLoadingData(false);

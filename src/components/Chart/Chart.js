@@ -51,7 +51,7 @@ function Chart(props) {
         name="Price per Square Meter"
         dataKey={UnitPriceNum}
         type="number"
-        domain={[0, 500000]}
+        domain={[0, "dataMax"]}
         allowDataOverflow={true}
       />
       <YAxis
