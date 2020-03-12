@@ -43,12 +43,10 @@ const Form = () => {
     // Year & Quarter validation
     if (fromYear > toYear) {
       document.getElementById("invalidYear").style.display = "inline-block";
-      return false;
     }
-
-    if (fromQuarter > toQuarter) {
+    //
+    if (fromYear === toYear && fromQuarter > toQuarter) {
       document.getElementById("invalidQuarter").style.display = "inline-block";
-      return false;
     }
 
     e.preventDefault();
