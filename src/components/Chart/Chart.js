@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as Recharts from "recharts";
-import { searchResults } from "../../containers/App";
 
 const {
   BarChart,
@@ -27,14 +26,6 @@ const CustomizedAxisTick = ({ x, y, payload }) => {
       </text>
     </g>
   );
-};
-
-const UnitPriceNum = ({ UnitPrice }) => {
-  if (isNaN(UnitPrice)) {
-    return 0;
-  } else if (UnitPrice > 0) {
-    return UnitPrice;
-  }
 };
 
 function Chart(props) {
