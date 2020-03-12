@@ -64,7 +64,6 @@ const Form = () => {
         } else {
           Obj["UnitPrice"] = 0;
         }
-
         return Obj;
       });
       setData(formattedData);

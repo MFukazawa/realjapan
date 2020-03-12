@@ -28,6 +28,14 @@ const CustomizedAxisTick = ({ x, y, payload }) => {
   );
 };
 
+const UnitPriceNum = ({ UnitPrice }) => {
+  if (isNaN(UnitPrice)) {
+    return 0;
+  } else if (UnitPrice > 0) {
+    return UnitPrice;
+  }
+};
+
 function Chart(props) {
   return (
     <BarChart
